@@ -1,0 +1,42 @@
+---
+
+- name: get sendy archive
+  get_url:
+    url: "{{sendy_get_url_src}}"
+    dest: "/tmp/sendy_{{sendy_version}}.zip"
+    mode: 0640
+  when: 'sendy_archive_with_get_url and not sendy_get_url_username'
+
+- name: get sendy archive with credentials
+  get_url:
+    url: "{{sendy_get_url_src}}"
+    dest: "/tmp/sendy_{{sendy_version}}.zip"
+    mode: 0640
+    url_username: "{{sendy_get_url_username}}"
+    url_password: "{{sendy_get_url_password}}"
+  when: 'sendy_archive_with_get_url and sendy_get_url_username'
+
+- name: ensure destination folder exist
+  file:
+    path: "{{sendy_full_dest_path}}"
+    owner: "{{sendy_user}}"
+    group: "{{sendy_group}}"
+    recurse: yes
+    state: directory
+
+- name: decompress archive to destination folder
+  unarchive:
+    src: "/tmp/sendy_{{sendy_version}}.zip"
+    dest: "{{sendy_dest_path}}"
+    copy: no
+
+- name: remove archive file
+  file: path=/tmp/sendy_{{sendy_version}}.zip
+
+- name: create version file
+  template:
+    src: sendy_version
+    dest: "{{sendy_full_dest_path}}/sendy_version"
+    owner: www-data
+    group: www-data
+    mode: 0644

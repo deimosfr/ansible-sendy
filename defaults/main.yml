@@ -1,0 +1,29 @@
+---
+
+# version to install
+sendy_version: "2.0.7"
+
+# get sendy via url
+sendy_archive_with_get_url: true
+sendy_get_url_src: "http://url_to_get_sendy/sendy-{{sendy_version}}.zip"
+sendy_get_url_username:
+sendy_get_url_password:
+
+# sendy's destination
+sendy_dest_path: "/usr/share/nginx/html"
+sendy_full_dest_path: "{{sendy_dest_path}}/sendy"
+sendy_user: "www-data"
+sendy_group: "www-data"
+
+# database information
+sendy_db_name: 'sendy'
+sendy_db_host: 'localhost'
+sendy_db_port: 3306
+sendy_db_username: 'tbd'
+sendy_db_password: 'tbd'
+sendy_db_permissions: "{{sendy_db_name}}.*:ALL"
+
+# sendy's configuration
+sendy_config_app_path: 'http://your_sendy_installation_url'
+sendy_config_app_cookie_domain: ''
+sendy_config_app_charset: 'utf8'

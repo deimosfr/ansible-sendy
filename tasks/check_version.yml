@@ -1,0 +1,11 @@
+---
+
+- name: check if sendy is installed
+  stat: path="{{sendy_full_dest_path}}"
+  register: sendy_installed
+
+- name: check sendy version
+  command: "cat {{sendy_full_dest_path}}/sendy_version"
+  register: sendy_current_version
+  when: sendy_installed.stat.exists
+  changed_when: false

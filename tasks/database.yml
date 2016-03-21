@@ -1,0 +1,18 @@
+---
+
+- name: create database
+  mysql_db:
+    name: "{{sendy_db_name}}"
+    collation: 'utf8_general_ci'
+    encoding: 'utf8'
+    state: present
+  delegate_to: "{{sendy_db_host}}"
+
+- name: create database user and permissions
+  mysql_user:
+    name: "{{sendy_db_name}}"
+    password: "{{sendy_db_password}}"
+    priv: "{{sendy_db_permissions}}"
+    host: "%"
+    state: present
+  delegate_to: "{{sendy_db_host}}"

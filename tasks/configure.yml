@@ -1,0 +1,25 @@
+---
+
+- name: set sendy folders permissions
+  file:
+    path: "{{sendy_dest_path}}"
+    owner: "{{sendy_user}}"
+    group: "{{sendy_group}}"
+    recurse: yes
+    state: directory
+
+- name: set sendy uploads folders permissions
+  file:
+    path: "{{sendy_full_dest_path}}/uploads"
+    owner: "{{sendy_user}}"
+    group: "{{sendy_group}}"
+    mode: 0777
+    state: directory
+
+- name: configure sendy through config.php
+  template:
+    src: "config.php.j2"
+    dest: "{{sendy_full_dest_path}}/includes/config.php"
+    owner: "{{sendy_user}}"
+    group: "{{sendy_group}}"
+
