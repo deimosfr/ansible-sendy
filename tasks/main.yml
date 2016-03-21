@@ -1,0 +1,17 @@
+---
+
+- include: check_version.yml
+  tags: [sendy]
+
+- include: prequesites.yml
+  tags: [sendy, sendy-prequesites]
+
+- include: install.yml
+  when: sendy_installed.stat.exists == False or sendy_version != sendy_current_version.stdout_lines.0
+  tags: [sendy, sendy-install]
+
+- include: database.yml
+  tags: [sendy, sendy-database]
+
+- include: configure.yml
+  tags: [sendy, sendy-configure]
