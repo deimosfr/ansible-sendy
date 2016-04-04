@@ -11,6 +11,7 @@
   tags: [sendy, sendy-install]
 
 - include: database.yml
+  when: sendy_manage_database
   tags: [sendy, sendy-database]
 
 - include: configure.yml

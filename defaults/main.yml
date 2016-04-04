@@ -16,6 +16,7 @@ sendy_user: "www-data"
 sendy_group: "www-data"
 
 # database information
+sendy_manage_database: true
 sendy_db_name: 'sendy'
 sendy_db_host: 'localhost'
 sendy_db_port: 3306
